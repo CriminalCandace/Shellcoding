@@ -144,9 +144,10 @@ main(int argc, char *argv[])
   for (i = 0; i < (words+1)*8; i++)
     {
 
-	bufB[i] = (((uint8_t) bufA[i] >> 4) & 0xf) | 0x30;
-	bufA[i] = ((uint8_t) bufA[i] & 0xf) | 0x30;
-/*
+	// bufB[i] = ((bufA[i] >> 4) & 0xf) | 0x30;
+	// bufA[i] = (bufA[i] & 0xf) | 0x30;
+	
+
       if (bufA[i] == 0xff)
         {
           bufB[i] = 0xf0;
@@ -157,7 +158,7 @@ main(int argc, char *argv[])
           bufB[i] = 0xff;
           bufA[i] ^= 0xff;
         }
-*/
+
     }
 
   printf("\t.dword ");
