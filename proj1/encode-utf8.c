@@ -138,9 +138,15 @@ main(int argc, char *argv[])
   /*
    * TODO: Change this encoding to be compatible with your
    * UTF-8 first-stage payload.
+   * Lower goes in A, Upper goes in B
+   * Upper nibble for bytes will be 0x3
    */
   for (i = 0; i < (words+1)*8; i++)
     {
+
+	bufB[i] = (((uint8_t) bufA[i] >> 4) & 0xf) | 0x30;
+	bufA[i] = ((uint8_t) bufA[i] & 0xf) | 0x30;
+/*
       if (bufA[i] == 0xff)
         {
           bufB[i] = 0xf0;
@@ -151,6 +157,7 @@ main(int argc, char *argv[])
           bufB[i] = 0xff;
           bufA[i] ^= 0xff;
         }
+*/
     }
 
   printf("\t.dword ");

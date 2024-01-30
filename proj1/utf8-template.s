@@ -17,11 +17,22 @@ _start:
 	c.addi	s0, 16
 	c.xor   s1, a5
 0:
-# get word to write into a0
+
+#Our work is here; A in a0, B in a1
 	c.ld	a0, 0(s0)
 	c.ld	a1, 8(s0)
 	c.addi	s0, 16
-	c.xor   a0, a1
+	ori	a0, a0, 0xf
+	c.slli	a1, 4
+	ori	a1, a1, 0xf0
+	c.or	a0, a1
+
+
+# get word to write into a0
+#	c.ld	a0, 0(s0)
+#	c.ld	a1, 8(s0)
+#	c.addi	s0, 16
+#	c.xor   a0, a1
 # store a0 on the stack
 	c.addi	sp, -8
 	c.sdsp	a0, 0(sp)
