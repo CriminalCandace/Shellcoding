@@ -22,7 +22,8 @@ _start:
 	c.ld	a0, 0(s0)
 	c.ld	a1, 8(s0)
 	c.addi	s0, 16
-	ori	a0, a0, 0xf
+	ori	a0, a0, 0xff
+	xori	a0, a0, 0xf0
 	c.slli	a1, 4
 	ori	a1, a1, 0xf0
 	c.or	a0, a1
