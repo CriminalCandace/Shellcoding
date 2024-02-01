@@ -144,11 +144,11 @@ main(int argc, char *argv[])
   for (i = 0; i < (words+1)*8; i++)
     {
 
-//	bufB[i] = ((bufA[i] & 0xf0) >> 4) + 0xf0;
-//	bufA[i] = (bufA[i] & 0xf) + 0xf0;
+	bufB[i] = ((bufA[i] & 0xf0) >> 4) + 0xf0;
+	bufA[i] = (bufA[i] & 0xf) + 0xf0;
 
 
-      if (bufA[i] == 0xff)
+/*      if (bufA[i] == 0xff)
         {
           bufB[i] = 0xf0;
           bufA[i] ^= 0xf0;
@@ -158,7 +158,7 @@ main(int argc, char *argv[])
           bufB[i] = 0xff;
           bufA[i] ^= 0xff;
         }
-
+*/
     }
 
 
