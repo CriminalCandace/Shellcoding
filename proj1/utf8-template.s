@@ -11,7 +11,11 @@ _start:
 	sub	s0, s2, x0
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
-        addi    s0, s0, 126
+#The 8-bit is not allowed in set of addi
+#Current Total: 156
+        addi    s0, s0, 52
+	addi	s0, s0, 52
+	addi	s0, s0, 52
 
 # Temp to deal with stupidity
 	c.li	a6, 0x3
@@ -25,13 +29,27 @@ _start:
 	xor	a7, s6, s6
 	c.li	a6, 0x0F
 	c.add	a7, a6
+
+	c.mv	t6, s8
 	c.slli	a7, 8
 	c.add	a7, a6
+
 	c.mv 	a6, a7
-	c.slli	a7, 16
+	c.mv	t6, s8
+	c.slli	a7, 8
+	c.mv	t6, s8
+	c.slli	a7, 8
 	c.add	a7, a6
+
 	c.mv	a6, a7
-	c.slli	a7, 32
+	c.mv	t6, s8
+	c.slli	a7, 8
+	c.mv	t6, s8
+	c.slli	a7, 8
+	c.mv	t6, s8
+	c.slli	a7, 8
+	c.mv	t6, s8
+	c.slli	a7, 8
 	c.add 	a7, a6
 
 # get count into s1
