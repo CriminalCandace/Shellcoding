@@ -12,10 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 156
-        addi    s0, s0, 52
-	addi	s0, s0, 52
-	addi	s0, s0, 52
+#Current Total: 162
+        addi    s0, s0, 54
+	addi	s0, s0, 54
+	addi	s0, s0, 54
 
 # Temp to deal with stupidity
 	c.li	a6, 0x3
@@ -34,7 +34,8 @@ _start:
 	c.slli	a7, 8
 	c.add	a7, a6
 
-	c.mv 	a6, a7
+	xor 	a6, s6, s6
+	or	a6, a6, a7
 	c.mv	t6, s8
 	c.slli	a7, 8
 	c.mv	t6, s8
