@@ -3,12 +3,13 @@
 	.text
 _start:
 # get payload address into s0
-	lui	a4, 0x1f7f7
-	auipc	s0, 0xe0808
-	c.add	s0, a4
+	auipc	s0, 0x7e7e1
+	lui	a7, 0x8181e
+	c.swsp	t0, 0x28
+	add	s0, s0, a7
         addi    s0, s0, 0x7ff
         addi    s0, s0, 0x7ff
-        addi    s0, s0, 80
+        addi    s0, s0, 88
 
 # load 8 bytes of 0x0F into a2
 	li	t1, 0x0F0F
