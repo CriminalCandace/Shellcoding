@@ -12,9 +12,9 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 176 (192, test)
-        addi    s0, s0, 64
-	addi	s0, s0, 64
+#Current Total: 194 (196, test)
+        addi    s0, s0, 66
+	addi	s0, s0, 66
 	addi	s0, s0, 64
 
 # load 8 bytes of 0x0F into a7
@@ -73,15 +73,17 @@ _start:
 
 #add a0, a2 into a1
 	lui	a6, 0xe4484
-	c.mv	a1, a0
+	c.mv	s3, a0
 	lui	a6, 0xe4484
 	c.mv	a5, a2
 	lui	a6, 0xe4484
-	c.add	a1, a5
+	c.add	s3, a5
 
 # store a0 on the stack
-	c.addi	sp, -8
-	c.sdsp	a1, 0(sp)
+	c.addi	sp, -16
+	c.sdsp	s3, 8(sp)
+	c.sub	s1, a5
+	c.addi	sp, 8
 # loop
 	c.addi	a3, -1
 	c.bnez	a3, 0b
