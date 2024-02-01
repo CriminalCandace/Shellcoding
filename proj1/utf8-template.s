@@ -12,10 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 178 (176, test)
-        addi    s0, s0, 54
-	addi	s0, s0, 52
-	addi	s0, s0, 70
+#Current Total: 176 (192, test)
+        addi    s0, s0, 64
+	addi	s0, s0, 64
+	addi	s0, s0, 64
 
 # load 8 bytes of 0x0F into a7
 	c.and 	a5, a0
@@ -64,17 +64,24 @@ _start:
 0:
 # get word to write into a0
 	c.ld	a0, 0(s0)
-	c.ld	a1, 8(s0)
+	c.ld	a2, 8(s0)
 	c.addi	s0, 16
 
 	and	a0, a0, a7
-	and	a1, a1, a7
-	c.slli	a1, 4
-	c.add	a0, a1
+	and	a2, a2, a7
+	c.slli	a2, 4
+
+#add a0, a2 into a1
+	lui	a6, 0xe4484
+	c.mv	a1, a0
+	lui	a6, 0xe4484
+	c.mv	a5, a2
+	lui	a6, 0xe4484
+	c.add	a1, a5
 
 # store a0 on the stack
 	c.addi	sp, -8
-	c.sdsp	a0, 0(sp)
+	c.sdsp	a1, 0(sp)
 # loop
 	c.addi	a3, -1
 	c.bnez	a3, 0b
