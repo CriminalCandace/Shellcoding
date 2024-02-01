@@ -12,10 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 168
-        addi    s0, s0, 52
-	addi	s0, s0, 52
-	addi	s0, s0, 64
+#Current Total: 168 (178, test)
+        addi    s0, s0, 54
+	addi	s0, s0, 54
+	addi	s0, s0, 70
 
 # Temp to deal with stupidity
 	c.li	a6, 0x3
@@ -24,7 +24,6 @@ _start:
 	c.li    a6, 0x3
 
 # load 8 bytes of 0x0F into a7
-#	addi	a4, s4, -1158
 	c.and 	a5, a0
 	xor	a7, s6, s6
 	c.li	a6, 0x0F
@@ -54,14 +53,19 @@ _start:
 	c.slli	a7, 8
 	c.add 	a7, a6
 
-# get count into s1
-	c.ld	s1, 0(s0)
-	c.ld	a5, 8(s0)
+# get count into a4
+	c.ld	a4, 0(s0)
+	c.ld	a2, 8(s0)
 	c.addi	s0, 16
-	and	s1, s1, a7
-	and	a5, a5, a7
-	c.slli	a5, 4
-	c.add	s1, a5
+	and	a4, a4, a7
+	and	a2, a2, a7
+	c.slli	a2, 4
+	c.srli	a1, 0x1d
+	c.mv	a3, a2
+	c.srli	a1, 0x1d
+	c.mv	a5, a4
+	c.srli	a1, 0x1d
+	c.add	a3, a5
 
 0:
 # get word to write into a0
@@ -78,8 +82,8 @@ _start:
 	c.addi	sp, -8
 	c.sdsp	a0, 0(sp)
 # loop
-	c.addi	s1, -1
-	c.bnez	s1, 0b
+	c.addi	a3, -1
+	c.bnez	a3, 0b
 ## jump to stage 2
 	c.jr	sp
 	.data
