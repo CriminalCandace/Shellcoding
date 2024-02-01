@@ -12,16 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 168 (178, test)
+#Current Total: 178 (176, test)
         addi    s0, s0, 54
-	addi	s0, s0, 54
+	addi	s0, s0, 52
 	addi	s0, s0, 70
-
-# Temp to deal with stupidity
-	c.li	a6, 0x3
-	c.li    a6, 0x3
-	c.li    a6, 0x3
-	c.li    a6, 0x3
 
 # load 8 bytes of 0x0F into a7
 	c.and 	a5, a0
@@ -60,11 +54,11 @@ _start:
 	and	a4, a4, a7
 	and	a2, a2, a7
 	c.slli	a2, 4
-	c.srli	a1, 0x1d
+	lui	a6, 0xe4484
 	c.mv	a3, a2
-	c.srli	a1, 0x1d
+	lui	a6, 0xe4484
 	c.mv	a5, a4
-	c.srli	a1, 0x1d
+	lui	a6, 0xe4484
 	c.add	a3, a5
 
 0:
