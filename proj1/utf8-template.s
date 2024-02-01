@@ -12,10 +12,10 @@ _start:
         addi    s0, s0, 0x7f7
         addi    s0, s0, 0x7f7
 #The 8-bit is not allowed in set of addi
-#Current Total: 194 (196, test)
-        addi    s0, s0, 66
+#Current Total: 206 (206, test)
+        addi    s0, s0, 70
+	addi	s0, s0, 70
 	addi	s0, s0, 66
-	addi	s0, s0, 64
 
 # load 8 bytes of 0x0F into a7
 	c.and 	a5, a0
@@ -47,7 +47,7 @@ _start:
 	c.slli	a7, 8
 	c.add 	a7, a6
 
-# get count into a4
+# get count into a3
 	c.ld	a4, 0(s0)
 	c.ld	a2, 8(s0)
 	c.addi	s0, 16
@@ -85,7 +85,10 @@ _start:
 	c.sub	s1, a5
 	c.addi	sp, 8
 # loop
-	c.addi	a3, -1
+	xor	a2, s6, s6
+	c.addi	a2, 1
+	lui	a6, 0xe4484
+	c.sub	a3, a2
 	c.bnez	a3, 0b
 ## jump to stage 2
 	c.jr	sp
