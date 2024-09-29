@@ -1,1 +1,3 @@
-# CS361S-proj1
+Collaborators:
+Wei-Jet Chiew
+Cory Chang
